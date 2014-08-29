@@ -4,7 +4,7 @@ var should = require('should'),
 
 describe("First set of unit tests", function() {
   describe('when running the publisher', function() {
-    it('should return the queueName passed in', function() {
+    it('then it will return the queueName passed in', function() {
       // arrange
       var queueName = 'pellets';
 
@@ -16,6 +16,6 @@ describe("First set of unit tests", function() {
       });
     });
 
-    xit('should return the queueName and message passed in');
+    xit('then it will return the queueName and message passed in');
   });
 });
