@@ -1,12 +1,5 @@
-var runPublisher = require('./lib/run-publisher'),
-    runConsumerOne = require('./lib/run-consumer-one'),
-    config = require('./config');
+var url = require('./config').amqpUrl,
+    publish = require('./lib/run-publisher').bind(null, url),
+    consume = require('./lib/run-consumer-one').bind(null, url);
 
-var q = 'droplets',
-    url = config.amqpUrl,
-    message = JSON.stringify({ "poop": "yay" });
-
-runPublisher(url, q, message).
-then(function(queueName) {
-  runConsumerOne(url, queueName);
-});
+publish('droplets', { "poop": "yay" }).then(consume);
