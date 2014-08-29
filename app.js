@@ -1,32 +1,12 @@
-var amqplib = require('amqplib'),
+var runPublisher = require('./lib/run-publisher'),
+    runConsumerOne = require('./lib/run-consumer-one'),
     config = require('./config');
 
-var q = 'droplets';
+var q = 'droplets',
+    url = config.amqpUrl,
+    message = JSON.stringify({ "poop": "yay" });
 
-var url = config.amqpUrl;
-var open = amqplib.connect(url);
-
-// Consumer
-open.then(function(conn) {
-  var ok = conn.createChannel();
-  ok = ok.then(function(ch) {
-    ch.assertQueue(q);
-    ch.consume(q, function(msg) {
-      if (msg !== null) {
-        console.log(msg.content.toString());
-        ch.ack(msg);
-      }
-    });
-  });
-  return ok;
-}).then(null, console.warn);
-
-// Publisher
-open.then(function(conn) {
-  var ok = conn.createChannel();
-  ok = ok.then(function(ch) {
-    ch.assertQueue(q);
-    ch.sendToQueue(q, new Buffer('something to do'));
-  });
-  return ok;
-}).then(null, console.warn);
+runPublisher(url, q, message).
+then(function(queueName) {
+  runConsumerOne(url, queueName);
+});
