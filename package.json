@@ -1,0 +1,27 @@
+{
+  "name": "rabbit-droplets",
+  "version": "0.0.0",
+  "description": "Learn rabbitmq using Node.js little by little",
+  "main": "app.js",
+  "dependencies": {
+    "amqplib": "^0.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tone81/rabbit-droplets.git"
+  },
+  "keywords": [
+    "rabbitmq",
+    "amqp"
+  ],
+  "author": "Tony Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tone81/rabbit-droplets/issues"
+  },
+  "homepage": "https://github.com/tone81/rabbit-droplets"
+}
